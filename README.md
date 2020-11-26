@@ -1,3 +1,3 @@
 # corona-virus
 
-This is an applciation that tracks corona virus confirmed cases numbers thourgh out the globe
+This is an applciation that provides corona virus confirmed cases numbers only in USA
