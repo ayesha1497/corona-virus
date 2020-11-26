@@ -19,7 +19,7 @@ import java.util.List;
 @Service
 public class CoronaVirusService {
 
-    private static String coronaVirusDataUrl = "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv";
+    private static String coronaVirusDataUrl = "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_US.csv";
 
     private List<CoronaVirus> allCoronaVirusInformation = new ArrayList<>();
 
@@ -46,13 +46,20 @@ public class CoronaVirusService {
         }
         for (CSVRecord record : records) {
             final CoronaVirus coronaVirus = new CoronaVirus();
-            coronaVirus.setState(record.get("Province/State"));
-            coronaVirus.setCountry(record.get("Country/Region"));
+            coronaVirus.setState(record.get("Province_State"));
+            coronaVirus.setCountry(record.get("Country_Region"));
             coronaVirus.setTotalConfirmedCases(Integer.parseInt(record.get(record.size() - 1)));
             newCoronaVirusInformation.add(coronaVirus);
         }
         this.allCoronaVirusInformation = newCoronaVirusInformation;
-        System.out.println(allCoronaVirusInformation.size());
         return coronaVirusInformation;
+    }
+
+    public List<CoronaVirus> getAllCoronaVirusInformation() {
+        return allCoronaVirusInformation;
+    }
+
+    public void setAllCoronaVirusInformation(List<CoronaVirus> allCoronaVirusInformation) {
+        this.allCoronaVirusInformation = allCoronaVirusInformation;
     }
 }
