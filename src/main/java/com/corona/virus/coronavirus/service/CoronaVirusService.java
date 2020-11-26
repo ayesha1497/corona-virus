@@ -24,7 +24,7 @@ public class CoronaVirusService {
     private List<CoronaVirus> allCoronaVirusInformation = new ArrayList<>();
 
     @PostConstruct
-    @Scheduled(cron = "* * 1 * * *")
+    @Scheduled(cron = "* * * * * *")
     public String getCoronaVirusInformation() {
         List<CoronaVirus> newCoronaVirusInformation = new ArrayList<>();
         String coronaVirusInformation;
@@ -46,6 +46,7 @@ public class CoronaVirusService {
         }
         for (CSVRecord record : records) {
             final CoronaVirus coronaVirus = new CoronaVirus();
+            coronaVirus.setCounty(record.get("Admin2"));
             coronaVirus.setState(record.get("Province_State"));
             coronaVirus.setCountry(record.get("Country_Region"));
             coronaVirus.setTotalConfirmedCases(Integer.parseInt(record.get(record.size() - 1)));
